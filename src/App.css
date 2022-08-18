@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.Headings{
+  text-align: left;
+  text-decoration: none;
+  color: Red;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

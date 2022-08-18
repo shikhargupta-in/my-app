@@ -1,62 +1,51 @@
-import React, {Component} from 'react'
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
-import '../css/Table.css'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import '../css/Table.css';
 
-const USER_SERVICE_URL = 'https://assessment.api.vweb.app/orders';
+function Orders() {
+    const [data, getData] = useState([])
+    const URL = 'https://assessment.api.vweb.app/orders';
 
-function rowClassNameFormat(row, rowIdx) {
-    return rowIdx % 2 === 0 ? 'Gold-Row' : 'Silver-Row';
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+
+    const fetchData = () => {
+        fetch(URL)
+            .then((res) =>
+                res.json())
+
+            .then((response) => {
+                console.log(response);
+                getData(response);
+            })
+
+    }
+
+    return (
+        <>
+            <tbody>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Product Id</th>
+                    <th>Quantity</th>
+                    <th>User ID</th>
+                    <th>Order Date</th>
+                </tr>
+                {data.map((item, i) => (
+                    <tr key={i}>
+                        <td>{item.order_id}</td>
+                        <td>{item.product_id}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.user_id}</td>
+                        <td>{item.order_date}</td>
+
+                    </tr>
+                ))}
+            </tbody>
+
+        </>
+    );
 }
 
-
-class Orders extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isFetching: false,
-            users: []
-        };
-    }
-
-    render() {
-        return (
-            <div>
-                <BootstrapTable data={this.state.users} trClassName={rowClassNameFormat}>
-                    <TableHeaderColumn isKey dataField='order_id'></TableHeaderColumn>
-                    <TableHeaderColumn dataField='product_id'></TableHeaderColumn>
-                    <TableHeaderColumn dataField='quantity'></TableHeaderColumn>
-                    <TableHeaderColumn dataField='user_id'></TableHeaderColumn>
-                    <TableHeaderColumn dataField='order_date'></TableHeaderColumn>
-                    
-                </BootstrapTable>
-                <p>{this.state.isFetching ? 'Fetching orders...' : ''}</p>
-            </div>
-        )
-    }
-
-    componentDidMount() {
-        this.fetchUsers();
-        this.timer = setInterval(() => this.fetchUsers(), 5000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
-        this.timer = null;
-    }
-
-    async fetchUsersAsync() {
-        try {
-            this.setState({...this.state, isFetching: true});
-            const response = await axios.get(USER_SERVICE_URL);
-            this.setState({users: response.data, isFetching: false});
-        } catch (e) {
-            console.log(e);
-            this.setState({...this.state, isFetching: false});
-        }
-    };
-
-    fetchUsers = this.fetchUsersAsync;
-}
-
-export default Orders
+export default Orders;

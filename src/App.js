@@ -8,11 +8,11 @@ import Orders from './components/Orders';
 function App() {
   return (
     <div className="App">
-      <h2> Users</h2>
+      <h2 className='Headings'> Users</h2>
       <Users/>
-      <h2> Products</h2>
+      <h2 className='Headings'> Products</h2>
       <Products/>
-      <h2> Orders</h2>
+      <h2 className='Headings'> Orders</h2>
       <Orders/>
     </div>
   );

@@ -1,15 +1,4 @@
-.Table-header {
-    background-color: #ccc;
-    color: blue;
-    padding: 10px;
-    text-align: left;
-}
-
-
-.Silver-Row {
-    background-color: silver;
-}
-
-.Gold-Row {
-    background-color: gold;
-}
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
