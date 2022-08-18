@@ -9,11 +9,11 @@ function App() {
   return (
     <div className="App">
       <h2 className='Headings'> Users</h2>
-      <Users/>
+      <Users />
       <h2 className='Headings'> Products</h2>
-      <Products/>
+      <Products />
       <h2 className='Headings'> Orders</h2>
-      <Orders/>
+      <Orders />
     </div>
   );
 }
